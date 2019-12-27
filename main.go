@@ -16,8 +16,9 @@ const (
 	goDwnURL   string = "https://dl.google.com/go/"
 	golangURL1 string = "https://golang.org/"
 	golangURL2 string = "https://play.golang.org/"
-	tmpDir     string = "/tmp/"
 )
+
+var tmpDir = os.TempDir() + string(os.PathSeparator)
 
 func main() {
 	version, _ := getLatestVersion(golangURL1)
