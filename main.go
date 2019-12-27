@@ -59,6 +59,7 @@ func main() {
 	err = copy.Copy(tmpDir+"go", goRootDir)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 	fmt.Println("updated go to the latest version!!!")
 }
