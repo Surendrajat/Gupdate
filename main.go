@@ -23,10 +23,15 @@ func main() {
 	version, _ := getLatestVersion(golangURL1)
 	version2, _ := getLatestVersion(golangURL2)
 	if version != version2 {
-		version = "couldn't fetch"
+		fmt.Println("Couldn't fetch latest version")
+		return
 	}
 	fmt.Println("Latest version:", version)
 	fmt.Println("Current version:", runtime.Version())
+	if version == runtime.Version() {
+		fmt.Println("Already up to date")
+		return
+	}
 	fmt.Println("downloading latest version...")
 	fileURL, err := downloadGo(version)
 	if err != nil {
