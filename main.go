@@ -7,6 +7,7 @@ import (
 	"github.com/otiai10/copy"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"regexp"
 	"runtime"
 )
@@ -39,7 +40,18 @@ func main() {
 		return
 	}
 	fmt.Println("updating current go binaries...")
-	err = copy.Copy(tmpDir+"go", runtime.GOROOT())
+	goRootDir := runtime.GOROOT()
+	err = os.RemoveAll(goRootDir)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = os.MkdirAll(goRootDir, 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = copy.Copy(tmpDir+"go", goRootDir)
 	if err != nil {
 		fmt.Println(err)
 	}
