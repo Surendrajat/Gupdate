@@ -22,7 +22,7 @@ const (
 func main() {
 	version, _ := getLatestVersion(golangURL1)
 	version2, _ := getLatestVersion(golangURL2)
-	if version != version2 {
+	if version != version2 || version == "" {
 		fmt.Println("Couldn't fetch latest version")
 		return
 	}
