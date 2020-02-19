@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/cavaliercoder/grab"
-	"github.com/mholt/archiver/v3"
-	"github.com/otiai10/copy"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
 	"runtime"
+
+	"github.com/cavaliercoder/grab"
+	"github.com/mholt/archiver/v3"
+	"github.com/otiai10/copy"
 )
 
 const (
@@ -23,9 +24,12 @@ var tmpDir = os.TempDir() + string(os.PathSeparator)
 func main() {
 	version, _ := getLatestVersion(golangURL1)
 	version2, _ := getLatestVersion(golangURL2)
-	if version != version2 || version == "" {
+	if version == "" && version2 == "" {
 		fmt.Println("Couldn't fetch latest version")
 		return
+	}
+	if version < version2 || version == "" {
+		version = version2
 	}
 	fmt.Println("Latest version:", version)
 	fmt.Println("Current version:", runtime.Version())
