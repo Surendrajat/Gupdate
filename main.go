@@ -16,7 +16,7 @@ import (
 const (
 	goDwnURL   string = "https://dl.google.com/go/"
 	golangURL1 string = "https://golang.org/"
-	golangURL2 string = "https://play.golang.org/"
+	golangURL2 string = "https://golang.org/dl/"
 )
 
 var tmpDir = os.TempDir() + string(os.PathSeparator)
@@ -81,7 +81,7 @@ func getLatestVersion(url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	versionRegex := regexp.MustCompile(`go[0-9]+[.0-9]+`)
+	versionRegex := regexp.MustCompile(`go1\.[0-9]+(.[0-9])?[0-9]*`)
 	return versionRegex.FindString(string(body)), nil
 }
 
